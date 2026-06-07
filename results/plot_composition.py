@@ -10,14 +10,14 @@ HID = 768
 TRANSFORMER = 101.54   # transformer encoder (M) — identical across all trims
 DENSE = 4.72           # 2x Dense projection heads (M) — identical across all trims
 
-# (label, vocab_size, mteb_por_mean16)
+# (label, vocab_size, mteb_por_mean16) — ordered largest -> smallest to show progressive trimming
 MODELS = [
     ("Original", 262144, 0.7257),
-    ("16k",       16384, 0.6520),
-    ("24k",       24576, 0.6895),
-    ("32k",       32768, 0.6881),
-    ("48k",       49152, 0.7098),
     ("64k",       65536, 0.7172),
+    ("48k",       49152, 0.7098),
+    ("32k",       32768, 0.6881),
+    ("24k",       24576, 0.6895),
+    ("16k",       16384, 0.6520),
 ]
 
 # professional palette
