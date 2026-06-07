@@ -27,13 +27,20 @@ Produced with the open-source tool 🛠️ **[embedding-vocab-trimmer](https://g
 
 ## Results — MTEB(por)
 
+The full **embeddinggemma-pt-br** family (vocabulary size sweep; this model = the **64k** sweet spot):
+
 | model | params | MTEB(por) `mean_16` |
 |---|---:|:---:|
 | google/embeddinggemma-300m | ~308M | 0.7257 |
-| **embeddinggemma-pt-br (this)** | **~157M** | **0.7172** |
+| [embeddinggemma-pt-br-128k](https://huggingface.co/tardellirs/embeddinggemma-pt-br-128k) | ~207M | 0.7192 |
+| **embeddinggemma-pt-br (64k, this)** | **~157M** | **0.7172** |
+| [embeddinggemma-pt-br-48k](https://huggingface.co/tardellirs/embeddinggemma-pt-br-48k) | ~144M | 0.7098 |
+| [embeddinggemma-pt-br-32k](https://huggingface.co/tardellirs/embeddinggemma-pt-br-32k) | ~131M | 0.6881 |
+| [embeddinggemma-pt-br-24k](https://huggingface.co/tardellirs/embeddinggemma-pt-br-24k) | ~125M | 0.6895 |
+| [embeddinggemma-pt-br-16k](https://huggingface.co/tardellirs/embeddinggemma-pt-br-16k) | ~119M | 0.6520 |
 
 `mean_16` = the 16 headline MTEB(por) tasks (classification, pair-classification, STS, clustering,
-retrieval, reranking). Full size sweep (16k/24k/32k/48k/64k) is in the
+retrieval, reranking). Full curve + charts in the
 [tool's results](https://github.com/tardellirs/embedding-vocab-trimmer/blob/main/results/mteb_por_pareto.md).
 
 ## Usage
