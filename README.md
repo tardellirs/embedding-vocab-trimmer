@@ -1,6 +1,6 @@
-# embedding-vocab-trimmer
+# How to trim an embedding model's vocabulary for a target language
 
-**Shrink a multilingual text-embedding model to a single language — no training, no GPU — by trimming its token vocabulary.**
+> **`embedding-vocab-trimmer`** — shrink a multilingual text-embedding model to a single language, **with no training and no GPU**, by trimming its token vocabulary.
 
 A multilingual embedding model keeps most of its parameters in the token-embedding matrix
 (EmbeddingGemma-300M: `262144 × 768 ≈ 201M` of its `~308M` params). If you only serve **one**
