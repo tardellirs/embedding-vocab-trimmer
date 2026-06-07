@@ -1,0 +1,19 @@
+embedding-vocab-trimmer
+Copyright 2026 tardellirs
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+----------------------------------------------------------------------
+Third-party models
+----------------------------------------------------------------------
+The example/derived model produced by this tool, and referenced in the
+documentation as `tardellirs/embeddinggemma-por-trim64k`, is derived from:
+
+  google/embeddinggemma-300m  (Google)
+
+EmbeddingGemma is distributed under the Gemma Terms of Use:
+  https://ai.google.dev/gemma/terms
+
+Any model trimmed from a base model inherits that base model's license and
+usage terms. This tool does not relicense derived models. Users are
+responsible for complying with the base model's license.

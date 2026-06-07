@@ -1,0 +1,19 @@
+# secrets — never commit
+.env
+*.key
+*.token
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# trimmed model outputs / caches
+trimmed-model/
+out/
+embeddinggemma-*/
+*.safetensors
+.cache/
+hf_cache/
