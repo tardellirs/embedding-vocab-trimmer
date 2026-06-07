@@ -53,12 +53,13 @@ for xi, e in zip(x, emb):
         ax.text(xi, TRANSFORMER + e / 2, f"{e:.0f}M", ha="center", va="center",
                 color="white", fontsize=9, zorder=4)
 
-# top labels: total params (bold) + MTEB(por) score in a pill
+# top labels: total params (bold) + MTEB(por) score & % of full in a pill
+FULL_SCORE = 0.7257
 for xi, t, sc in zip(x, totals, scores):
     ax.text(xi, t + 6, f"{t:.0f}M", ha="center", va="bottom", fontweight="bold",
             color=SLATE, fontsize=10.5)
-    ax.annotate(f"MTEB(por)  {sc:.3f}", (xi, t + 24), ha="center", va="bottom",
-                fontsize=9.5, fontweight="bold", color=ACCENT,
+    ax.annotate(f"{sc:.3f}  ·  {sc/FULL_SCORE*100:.1f}% of full", (xi, t + 24), ha="center", va="bottom",
+                fontsize=9, fontweight="bold", color=ACCENT,
                 bbox=dict(boxstyle="round,pad=0.32", fc="#fff7ed", ec="#fdba74", lw=1))
 
 ax.set_ylim(0, 360)

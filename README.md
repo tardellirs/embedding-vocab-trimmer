@@ -72,15 +72,15 @@ e.g. `por`, `fra`, `deu`, `spa`). Use `--corpus-dataset` to mine from any other 
 Evaluated on **MTEB(por)** (16 headline tasks, `mean_16`). *Vocabulary size is the only lever — quality
 recovers monotonically as you keep more tokens; **the encoder and Dense heads are identical at every size.***
 
-| vocab | params | MTEB(por) `mean_16` | vs. full EG-300M |
-|------:|-------:|:-------------------:|:----------------:|
-| 16k   | ~119M  | 0.652  | −0.074 |
-| 24k   | ~125M  | 0.6895 | −0.036 |
-| 32k   | ~131M  | 0.6881 | −0.038 |
-| 48k   | ~144M  | 0.7098 | −0.016 |
-| **64k** | **~157M** | **0.7172** | **−0.0085** |
-| 128k  | ~207M  | 0.7192 | −0.0065 |
-| *full EG-300M* | *~308M* | *0.7257* | *—* |
+| vocab | params | MTEB(por) `mean_16` | % of full |
+|------:|-------:|:-------------------:|:---------:|
+| 16k   | ~119M  | 0.652  | 89.8% |
+| 24k   | ~125M  | 0.6895 | 95.0% |
+| 32k   | ~131M  | 0.6881 | 94.8% |
+| 48k   | ~144M  | 0.7098 | 97.8% |
+| **64k** | **~157M** | **0.7172** | **98.8%** |
+| 128k  | ~207M  | 0.7192 | 99.1% |
+| *full EG-300M* | *~308M* | *0.7257* | *100%* |
 
 **64k is the sweet spot: ≈ full-model quality at half the parameters.** 24k is the smallest practical
 point (smaller models lose fine retrieval quality fast). See [`results/`](results/) and the worked
