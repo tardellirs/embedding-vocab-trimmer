@@ -13,6 +13,7 @@ DENSE = 4.72           # 2x Dense projection heads (M) — identical across all 
 # (label, vocab_size, mteb_por_mean16) — ordered largest -> smallest to show progressive trimming
 MODELS = [
     ("Original", 262144, 0.7257),
+    ("128k",     131072, 0.7192),
     ("64k",       65536, 0.7172),
     ("48k",       49152, 0.7098),
     ("32k",       32768, 0.6881),

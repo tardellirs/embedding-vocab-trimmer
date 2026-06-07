@@ -14,6 +14,7 @@ clustering, retrieval, reranking). Higher is better.
 | 32k   | ~131M  | 0.6881 | −0.0376 | ≈ 24k (within noise) |
 | 48k   | ~144M  | 0.7098 | −0.0159 | |
 | **64k** | **~157M** | **0.7172** | **−0.0085** | **sweet spot — ≈ full quality, ½ params** |
+| 128k  | ~207M  | 0.7192 | −0.0065 | near-full; diminishing returns (+0.002 over 64k for +50M) |
 | full  | ~308M  | 0.7257 | — | untrimmed EmbeddingGemma-300M |
 
 **Reading the curve:** quality recovers monotonically above 32k. At 64k the trim keeps **98.8%** of

@@ -79,6 +79,7 @@ recovers monotonically as you keep more tokens; **the encoder and Dense heads ar
 | 32k   | ~131M  | 0.6881 | −0.038 |
 | 48k   | ~144M  | 0.7098 | −0.016 |
 | **64k** | **~157M** | **0.7172** | **−0.0085** |
+| 128k  | ~207M  | 0.7192 | −0.0065 |
 | *full EG-300M* | *~308M* | *0.7257* | *—* |
 
 **64k is the sweet spot: ≈ full-model quality at half the parameters.** 24k is the smallest practical
