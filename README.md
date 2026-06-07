@@ -12,7 +12,9 @@ SentenceTransformers pooling/Dense heads **bit-for-bit unchanged**.
 > **Result on Portuguese (EmbeddingGemma-300M → 157M):** the 64k-vocab trim keeps **98.8%** of
 > the full model's MTEB(por) score at **~half the parameters** — *with zero training*.
 
-📦 Example model: **[`tardellirs/embeddinggemma-por-trim64k`](https://huggingface.co/tardellirs/embeddinggemma-por-trim64k)** · 🛠️ Tool: [github.com/tardellirs/embedding-vocab-trimmer](https://github.com/tardellirs/embedding-vocab-trimmer)
+📦 Example model: **[`tardellirs/embeddinggemma-pt-br`](https://huggingface.co/tardellirs/embeddinggemma-pt-br)** · 🛠️ Tool: [github.com/tardellirs/embedding-vocab-trimmer](https://github.com/tardellirs/embedding-vocab-trimmer)
+
+![Parameter composition and MTEB(por) score by vocabulary size — EmbeddingGemma-300M (PT)](results/composition.png)
 
 ---
 
@@ -54,11 +56,11 @@ python trim_vocab.py \
     --model google/embeddinggemma-300m \
     --corpus-config por \
     --vocab-size 64000 \
-    --output ./embeddinggemma-por-trim64k
+    --output ./embeddinggemma-pt-br
 
 # (optional) upload to the Hub — needs HF_TOKEN in your environment
 python trim_vocab.py --model google/embeddinggemma-300m --corpus-config por \
-    --vocab-size 64000 --output ./out --push <user>/embeddinggemma-por-trim64k
+    --vocab-size 64000 --output ./out --push <user>/embeddinggemma-pt-br
 ```
 
 `--corpus-config` is the language code of the mining corpus (defaults to the
@@ -72,7 +74,7 @@ recovers monotonically as you keep more tokens; **the encoder and Dense heads ar
 
 | vocab | params | MTEB(por) `mean_16` | vs. full EG-300M |
 |------:|-------:|:-------------------:|:----------------:|
-| 16k   | ~116M  | 0.652  | −0.074 |
+| 16k   | ~119M  | 0.652  | −0.074 |
 | 24k   | ~125M  | 0.6895 | −0.036 |
 | 32k   | ~131M  | 0.6881 | −0.038 |
 | 48k   | ~144M  | 0.7098 | −0.016 |

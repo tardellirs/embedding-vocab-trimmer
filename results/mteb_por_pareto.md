@@ -9,7 +9,7 @@ clustering, retrieval, reranking). Higher is better.
 
 | vocab | params | `mean_16` | Δ vs full | notes |
 |------:|-------:|:---------:|:---------:|-------|
-| 16k   | ~116M  | 0.6520 | −0.0737 | over-trimmed; fine retrieval degrades |
+| 16k   | ~119M  | 0.6520 | −0.0737 | over-trimmed; fine retrieval degrades |
 | 24k   | ~125M  | 0.6895 | −0.0362 | smallest practical point |
 | 32k   | ~131M  | 0.6881 | −0.0376 | ≈ 24k (within noise) |
 | 48k   | ~144M  | 0.7098 | −0.0159 | |

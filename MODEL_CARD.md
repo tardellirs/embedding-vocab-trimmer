@@ -13,7 +13,7 @@ tags:
 - mteb
 ---
 
-# embeddinggemma-por-trim64k
+# embeddinggemma-pt-br
 
 A **Portuguese-only** text-embedding model, **vocabulary-trimmed** from
 [`google/embeddinggemma-300m`](https://huggingface.co/google/embeddinggemma-300m).
@@ -30,7 +30,7 @@ Produced with the open-source tool 🛠️ **[embedding-vocab-trimmer](https://g
 | model | params | MTEB(por) `mean_16` |
 |---|---:|:---:|
 | google/embeddinggemma-300m | ~308M | 0.7257 |
-| **embeddinggemma-por-trim64k (this)** | **~157M** | **0.7172** |
+| **embeddinggemma-pt-br (this)** | **~157M** | **0.7172** |
 
 `mean_16` = the 16 headline MTEB(por) tasks (classification, pair-classification, STS, clustering,
 retrieval, reranking). Full size sweep (16k/24k/32k/48k/64k) is in the
@@ -41,7 +41,7 @@ retrieval, reranking). Full size sweep (16k/24k/32k/48k/64k) is in the
 ```python
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer("tardellirs/embeddinggemma-por-trim64k")
+model = SentenceTransformer("tardellirs/embeddinggemma-pt-br")
 emb = model.encode(
     ["O Brasil é um país tropical da América do Sul.",
      "Operações matemáticas envolvem soma e multiplicação."],
@@ -63,7 +63,7 @@ filter the BPE merges (keep `A B → AB` only if A, B and AB all survive) → sl
 
 ```bash
 python trim_vocab.py --model google/embeddinggemma-300m --corpus-config por \
-    --vocab-size 64000 --output ./embeddinggemma-por-trim64k
+    --vocab-size 64000 --output ./embeddinggemma-pt-br
 ```
 
 ## Scope, transparency & limitations

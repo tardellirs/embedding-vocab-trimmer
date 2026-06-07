@@ -1,7 +1,7 @@
 # Worked example — EmbeddingGemma-300M → Portuguese
 
 This reproduces the flagship model
-[`tardellirs/embeddinggemma-por-trim64k`](https://huggingface.co/tardellirs/embeddinggemma-por-trim64k):
+[`tardellirs/embeddinggemma-pt-br`](https://huggingface.co/tardellirs/embeddinggemma-pt-br):
 a 64k-vocabulary, ~157M-param Portuguese embedder trimmed from the 308M multilingual EmbeddingGemma-300M.
 
 ## Run it
@@ -12,7 +12,7 @@ python trim_vocab.py \
     --corpus-config por \
     --vocab-size 64000 \
     --n-texts 200000 \
-    --output ./embeddinggemma-por-trim64k
+    --output ./embeddinggemma-pt-br
 ```
 
 `google/embeddinggemma-300m` is a **gated** model — accept the license on its Hugging Face page and set
@@ -35,7 +35,7 @@ trimmed embedding (262144, 768) -> (64000, 768) | total params ~157,000,000
 ```python
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer("tardellirs/embeddinggemma-por-trim64k")  # or your local ./output dir
+model = SentenceTransformer("tardellirs/embeddinggemma-pt-br")  # or your local ./output dir
 docs = ["O Brasil é um país tropical da América do Sul.",
         "Operações matemáticas envolvem soma e multiplicação."]
 emb = model.encode(docs, normalize_embeddings=True)
