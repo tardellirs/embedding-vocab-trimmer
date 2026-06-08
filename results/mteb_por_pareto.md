@@ -27,6 +27,6 @@ Reproduce any row with:
 python trim_vocab.py --model google/embeddinggemma-300m --corpus-config por --vocab-size 64000 --output ./out
 ```
 
-Evaluation harness: the public MTEB(por) benchmark *(release coming soon)*. Numbers above are full-suite
+Evaluation harness: the public MTEB(por) benchmark ([leaderboard](https://huggingface.co/spaces/mteb-pt/leaderboard)). Numbers above are full-suite
 `mean_16`; a fast in-loop proxy that drops the largest retrieval pool inflates absolute scores and should
 not be used for headline numbers.

@@ -88,4 +88,4 @@ python trim_vocab.py --model google/embeddinggemma-300m --corpus-config por \
 Derived from EmbeddingGemma and distributed under the
 [**Gemma Terms of Use**](https://ai.google.dev/gemma/terms). The trimming tool is Apache-2.0.
 
-*Benchmark: MTEB(por) — public release coming soon (citation/link to be added).*
+*Benchmark: MTEB(por) — leaderboard: https://huggingface.co/spaces/mteb-pt/leaderboard*

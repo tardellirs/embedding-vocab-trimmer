@@ -108,5 +108,4 @@ EmbeddingGemma and is distributed under the **[Gemma license](https://ai.google.
 
 ## Citation
 
-If this is useful, a star or a link back is appreciated. Benchmark: MTEB(por) *(public release coming soon —
-link to be added)*.
+If this is useful, a star or a link back is appreciated. Benchmark: MTEB(por) ([leaderboard](https://huggingface.co/spaces/mteb-pt/leaderboard)).
