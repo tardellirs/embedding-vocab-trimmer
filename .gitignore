@@ -10,6 +10,9 @@ __pycache__/
 venv/
 *.egg-info/
 
+# analysis / plotting scripts (not part of the trimming tool)
+results/plot_*.py
+
 # trimmed model outputs / caches
 trimmed-model/
 out/
