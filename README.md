@@ -9,7 +9,7 @@ your language actually uses, keeps the top-K, re-indexes the embedding matrix, a
 BPE merge table — pure matrix surgery that leaves the transformer encoder and the
 SentenceTransformers pooling/Dense heads **bit-for-bit unchanged**.
 
-> **Result on Portuguese (EmbeddingGemma-300M → 157M):** the 64k-vocab trim keeps **98.8%** of
+> **Result on Portuguese (EmbeddingGemma-300M → 157M):** the 64k-vocab trim keeps **99.4%** of
 > the full model's MTEB(por) score at **~half the parameters** — *with zero training*.
 
 📦 Example model: **[`tardellirs/embeddinggemma-pt-br`](https://huggingface.co/tardellirs/embeddinggemma-pt-br)** · 🛠️ Tool: [github.com/tardellirs/embedding-vocab-trimmer](https://github.com/tardellirs/embedding-vocab-trimmer)
@@ -69,18 +69,18 @@ e.g. `por`, `fra`, `deu`, `spa`). Use `--corpus-dataset` to mine from any other 
 
 ## Results — Portuguese (EmbeddingGemma-300M)
 
-Evaluated on **MTEB(por)** (16 headline tasks, `mean_16`). *Vocabulary size is the only lever — quality
+Evaluated on **MTEB(por)** (22 headline tasks, `mean_22`). *Vocabulary size is the only lever — quality
 recovers monotonically as you keep more tokens; **the encoder and Dense heads are identical at every size.***
 
-| vocab | params | MTEB(por) `mean_16` | % of full |
+| vocab | params | MTEB(por) `mean_22` | % of full |
 |------:|-------:|:-------------------:|:---------:|
-| 16k   | ~119M  | 0.652  | 89.8% |
-| 24k   | ~125M  | 0.6895 | 95.0% |
-| 32k   | ~131M  | 0.6881 | 94.8% |
-| 48k   | ~144M  | 0.7098 | 97.8% |
-| **64k** | **~157M** | **0.7172** | **98.8%** |
-| 128k  | ~207M  | 0.7192 | 99.1% |
-| *full EG-300M* | *~308M* | *0.7257* | *100%* |
+| 16k   | ~119M  | 0.5950 | 91.7% |
+| 24k   | ~125M  | 0.6263 | 96.5% |
+| 32k   | ~131M  | 0.6201 | 95.5% |
+| 48k   | ~144M  | 0.6418 | 98.9% |
+| **64k** | **~157M** | **0.6453** | **99.4%** |
+| 128k  | ~207M  | 0.6491 | ≈100% |
+| *full EG-300M* | *~308M* | *0.6490* | *100%* |
 
 **64k is the sweet spot: ≈ full-model quality at half the parameters.** 24k is the smallest practical
 point (smaller models lose fine retrieval quality fast). See [`results/`](results/) and the worked
