@@ -32,7 +32,7 @@ $$f(v) = \sum_{x \in \mathcal{C}} \sum_{t \in \tau(x)} \mathbf{1}[t = v], \qquad
 
 Let $\mathcal{S} \subset \mathcal{V}$ be the set of mandatory special tokens (pad, bos, eos, unk, and high-frequency byte-fallback tokens). The trimmed vocabulary of size $K$ is:
 
-$$\mathcal{V}_K = \underset{v \,\in\, \mathcal{V} \setminus \mathcal{S}}{\operatorname{Top-}K}\{f(v)\} \;\cup\; \mathcal{S}$$
+$$\mathcal{V}_K = \underset{v \,\in\, \mathcal{V} \setminus \mathcal{S}}{\text{Top-}K}\{f(v)\} \;\cup\; \mathcal{S}$$
 
 A contiguous re-indexing bijection $\sigma: \mathcal{V}_K \to \{0, \ldots, |\mathcal{V}_K|-1\}$ is then constructed, preserving the original relative order of token ids.
 
@@ -68,9 +68,9 @@ $$\Delta P = (262{,}144 - 64{,}000) \times 768 \approx 152\text{M parameters} \q
 
 Because the encoder is identical across all trim sizes, quality loss arises solely from tokenization changes for out-of-vocabulary tokens. As $K$ grows, the coverage of the language's actual token distribution approaches unity and the score converges to the untrimmed baseline:
 
-$$\lim_{K \to V} \operatorname{MTEB}(f_{\theta_K}) = \operatorname{MTEB}(f_\theta)$$
+$$\lim_{K \to V} \text{MTEB}(f_{\theta_K}) = \text{MTEB}(f_\theta)$$
 
-Empirically, convergence is fast: at $K = 64{,}000$ on Portuguese, $\operatorname{MTEB}(f_{\theta_K}) / \operatorname{MTEB}(f_\theta) = 99.4\%$.
+Empirically, convergence is fast: at $K = 64{,}000$ on Portuguese, $\text{MTEB}(f_{\theta_K}) / \text{MTEB}(f_\theta) = 99.4\%$.
 
 ---
 
