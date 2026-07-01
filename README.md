@@ -136,6 +136,24 @@ See [`results/`](results/) and [`examples/embeddinggemma_pt.md`](examples/embedd
 
 ![MTEB(por) vs. params](results/pareto.png)
 
+## Candidate models
+
+The key metric for assessing trimming potential is the **embedding fraction** $\rho = (V \times d) \,/\, P_\text{total}$ — the share of parameters that live in the embedding matrix and can therefore be removed. Models with small encoders and large multilingual vocabularies (>200k tokens) are the best candidates.
+
+| Model | $V$ | $d$ | Emb (M) | Total (M) | $\rho$ |
+|-------|----:|----:|--------:|----------:|-------:|
+| sentence-transformers/LaBSE | 501,153 | 768 | 384.9 | 471 | **81.7%** |
+| intfloat/multilingual-e5-base | 250,002 | 768 | 192.0 | 278 | **69.1%** |
+| paraphrase-multilingual-mpnet-base-v2 | 250,002 | 768 | 192.0 | 278 | **69.1%** |
+| google/embeddinggemma-300m | 262,144 | 768 | 201.3 | 308 | **65.4%** |
+| intfloat/multilingual-e5-large | 250,002 | 1024 | 256.0 | 560 | 45.7% |
+| BAAI/bge-m3 | 250,002 | 1024 | 256.0 | 568 | 45.1% |
+| Qwen/Qwen3-Embedding-0.6B | 151,669 | 1024 | 155.3 | 596 | 26.1% |
+| Qwen/Qwen3-Embedding-4B | 151,665 | 2560 | 388.3 | 4,020 | 9.7% |
+| intfloat/e5-mistral-7b-instruct | 32,000 | 4096 | 131.1 | 7,111 | 1.8% |
+
+The pattern is consistent: **encoder-only or bi-encoder models with a multilingual tokenizer** (XLM-RoBERTa = 250k; Google SentencePiece = 262k; LaBSE = 501k) concentrate parameters in the embedding matrix and yield the largest reductions. Decoder-only models (Mistral, Qwen, LLaMA families) have small vocabularies relative to their encoder size, making trimming largely ineffective.
+
 ## Limitations
 
 - **Compression, not enhancement.** Vocabulary trimming removes unused parameters; it does not improve
