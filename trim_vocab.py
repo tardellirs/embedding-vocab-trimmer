@@ -212,6 +212,12 @@ def main():
                          args.vocab_size, args.n_texts, args.output,
                          device=args.device, smoke=not args.no_smoke)
 
+    print(f"\n{out} is BPE-ready (tokenizer.json re-indexed, tokenizer.model removed).")
+    print("To build a FAITHFUL GGUF for llama.cpp (bit-exact tokenization), register its pre-tokenizer:")
+    print(f"  python gguf_bpe_patch.py --trimmed {out} --res granite-embed-multi-311m --llama-cpp ~/llama.cpp --apply")
+    print("  # (gemma/EmbeddingGemma use that res; for a converter-known base, use --base instead of --res)")
+    print("then convert (embedding models add --sentence-transformers-dense-modules). See GGUF-LLAMACPP-GUIDE.md §0.")
+
     if args.push:
         from huggingface_hub import HfApi, create_repo
         token = os.environ["HF_TOKEN"]

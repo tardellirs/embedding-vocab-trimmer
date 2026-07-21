@@ -114,6 +114,26 @@ python trim_vocab.py --model google/embeddinggemma-300m --corpus-config por \
 [`lbourdois/fineweb-2-trimming`](https://huggingface.co/datasets/lbourdois/fineweb-2-trimming),
 e.g. `por`, `fra`, `deu`, `spa`). Pass `--corpus-dataset` to mine from any other HuggingFace text dataset.
 
+## Deploy on CPU with GGUF / llama.cpp
+
+The trimmed model is **BPE-ready** (`trim_vocab.py` re-indexes `tokenizer.json` and removes the stale
+`tokenizer.model`). To build a **faithful** GGUF — tokenizing *bit-for-bit* like the original — register the trimmed
+model's pre-tokenizer with llama.cpp's converter using [`gguf_bpe_patch.py`](gguf_bpe_patch.py), then convert:
+
+```bash
+# EmbeddingGemma/gemma aren't "known models" to the converter, so pass the pre-tokenizer id explicitly:
+python gguf_bpe_patch.py --trimmed ./out --res granite-embed-multi-311m --llama-cpp ~/llama.cpp --apply
+python ~/llama.cpp/convert_hf_to_gguf.py ./out --outfile m-f16.gguf --outtype f16 --sentence-transformers-dense-modules
+~/llama.cpp/build/bin/llama-quantize m-f16.gguf m-Q8_0.gguf Q8_0
+```
+
+(For a base the converter already recognizes, drop `--res` and use `--base <model>` to auto-detect it.)
+
+This **BPE path is the recommended one for both embedding and generative (LLM) trims**: for embeddings it matches a
+reconstructed SentencePiece (cosine **0.9998**), and for LLMs used with greedy decoding it is **required** (a
+reconstructed unigram SPM is not bit-exact and silently degrades long-prompt generation). Full recipe, evidence, and the
+legacy SPM path: [**`GGUF-LLAMACPP-GUIDE.md`**](GGUF-LLAMACPP-GUIDE.md).
+
 ## Results — Portuguese (EmbeddingGemma-300M)
 
 Evaluated on **MTEB(por)** — 22 native PT-BR tasks spanning classification, pair-classification, STS,

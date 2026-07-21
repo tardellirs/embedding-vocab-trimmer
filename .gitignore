@@ -20,3 +20,6 @@ embeddinggemma-*/
 *.safetensors
 .cache/
 hf_cache/
+
+# local agent config
+.claude/
