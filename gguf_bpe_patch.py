@@ -106,6 +106,19 @@ def _known_res(src: str):
     return sorted(set(re.findall(r'\n\s*res\s*=\s*"([^"]+)"', src)))
 
 
+def _insert(src: str, patch: str):
+    """Insert the patch into get_vocab_base_pre(), after the registered hashes and before the unrecognized-tokenizer
+    branch. Newer llama.cpp raises inside `if res is None:` (after the warnings), so the patch goes before that `if`;
+    put right before the `raise` it would land inside the block, after the warnings, and the raise would still run."""
+    raise_re = re.search(r"\n(\s*)raise NotImplementedError\(\s*\n?\s*\"BPE pre-tokenizer was not recognized", src)
+    if not raise_re:
+        return None
+    fn = src.rfind("def get_vocab_base_pre", 0, raise_re.start())
+    guard = src.rfind("\n        if res is None:", max(fn, 0), raise_re.start())
+    idx = guard + 1 if guard != -1 else raise_re.start() + 1
+    return src[:idx] + patch + src[idx:]
+
+
 def main():
     ap = argparse.ArgumentParser(description="Register a trimmed BPE model's pre-tokenizer with llama.cpp convert.")
     ap.add_argument("--trimmed", required=True, help="path to the trimmed model dir (output of trim_vocab.py)")
@@ -147,7 +160,7 @@ def main():
     print(f"pre-tokenizer  : {base_res!r}")
 
     patch = (f'        if chkhsh == "{trimmed_h}":\n'
-             f'            res = "{base_res}"  # vocab-trimmed {args.base}: same pre-tokenizer, '
+             f'            res = "{base_res}"  # vocab-trimmed {args.base or "model"}: same pre-tokenizer, '
              f'trimmed vocab only changes the hash\n')
 
     if not args.apply:
@@ -156,12 +169,9 @@ def main():
         print("re-run with --apply to insert it automatically.")
         return
 
-    # insert right before the `raise NotImplementedError(...)` in get_vocab_base_pre()
-    raise_re = re.search(r"\n(\s*)raise NotImplementedError\(\s*\n?\s*\"BPE pre-tokenizer was not recognized", src)
-    if not raise_re:
+    new_src = _insert(src, patch)
+    if new_src is None:
         raise SystemExit("could not find the NotImplementedError insertion point; add the patch above manually.")
-    idx = raise_re.start() + 1
-    new_src = src[:idx] + patch + src[idx:]
     open(src_path, "w", encoding="utf-8").write(new_src)
     print(f"\n✓ patched {src_path} — the trimmed model will now convert via the faithful BPE path.")
 

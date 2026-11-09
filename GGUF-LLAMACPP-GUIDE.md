@@ -172,6 +172,13 @@ entre todos os usuários**. O cliente prependa os prompts (o server não).
 
 ## PARTE 2 — Para a sessão do modelo `colibri` (corrigir o modelo publicado)
 
+> ✅ **Feito em 2026-11-09:** `tardellirs/colibri-embed-ptbr` publicado com os added_tokens vestigiais removidos e com
+> `add_bos_token`/`add_eos_token` restaurados no `tokenizer_config.json`. O transformers 5.x apagou essas flags ao
+> salvar; sem elas o transformers 4.x omite o `<eos>`, e o embedding fica a ~0.87 de cosseno do certo. GGUFs pelo
+> caminho BPE (§0) públicos em **`tardellirs/colibri-embed-ptbr-GGUF`**: f16, Q8_0 (cosseno 0.9996, 229 MB de RAM),
+> Q6_K, Q5_K_M e Q4_K_M. Ao comparar GGUF × HF, a referência HF tem que ter o `<eos>`: no transformers 4.x, sem a
+> flag, o cosseno cai para 0.87 e parece erro do GGUF.
+
 ### 2.1 Os 2 problemas do `tardellirs/colibri-embed-ptbr` (e o finetune)
 1. **Inconsistência tokenizer × embedding:** o `tokenizer.json` tem **70.246 tokens** (max id 70245), mas a matriz
    de embedding tem só **64.000 linhas**. Os ~6.246 tokens com id 64000–70245 são **added_tokens vestigiais do
